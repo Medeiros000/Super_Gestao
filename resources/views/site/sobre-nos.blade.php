@@ -1,6 +1,6 @@
 @extends('site.layouts._partials.basico')
 
-@section('titulo', 'Sobre Nós')
+@section('titulo', $titulo)
 
 @section('conteudo')
     <div class="conteudo-pagina">

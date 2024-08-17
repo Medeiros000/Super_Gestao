@@ -16,7 +16,7 @@ class LoginController extends Controller
                 default => '',
             };
 
-        return view('site.login', ['titulo' => 'login',  'erro' => $erro]);
+        return view('site.login', ['titulo' => 'Login',  'erro' => $erro]);
     }
 
     public function autenticar(Request $request)
