@@ -5,7 +5,7 @@
 @section('conteudo')
     <div class="conteudo-pagina">
         <div class="titulo-pagina-2">
-            <p>Adicionar Produto</p>
+            <p>{{ $titulo }}</p>
         </div>
         <div class="menu">
             <ul>
@@ -15,8 +15,9 @@
         </div>
         <div class="informacao-pagina">
             <div style="width:30%; margin: 0 auto">
-                <form action="{{ route('produto.store') }}" method="post">
+                <form action="{{ route('produto.update', ['produto' => $produto->id]) }}" method="post">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" name="id" value="{{ $produto->id ?? old('id') }}">
                     <input type="text" name="nome" value="{{ $produto->nome ?? old('nome') }}" placeholder="Nome" class="borda-preta">
                     {{ $errors->has('nome') ? $errors->first('nome') : '' }}
@@ -31,7 +32,7 @@
                         @endforeach
                     </select>
                     {{ $errors->has('unidade_id') ? $errors->first('unidade_id') : '' }}
-                    <button type="submit" class="borda-preta">Cadastrar</button>
+                    <button type="submit" class="borda-preta">Editar</button>
                 </form>
             </div>
         </div>

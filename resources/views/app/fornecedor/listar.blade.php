@@ -39,11 +39,26 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $fornecedores->appends($request)->links() }}
+                {{-- {{ $fornecedores->appends($request)->links() }} --}}
+                <div style="margin: 2rem;">
+                    Exibindo {{ ($fornecedores->firstItem()) }} ao {{ ($fornecedores->lastItem()) }} do total de {{ $fornecedores->total() }}
+                </div>
                 <div style="margin: 1rem">
-                    <a style="margin: 0.5rem; text-decoration:none;" href="{{ $fornecedores->appends($request)->previousPageUrl() ?? '' }}">« Anterior</a>
-                            Exibindo {{ ($fornecedores->firstItem()) }} ao {{ ($fornecedores->lastItem()) }} do total de {{ $fornecedores->total() }}
-                    <a style="margin: 0.5rem; text-decoration:none;" href="{{ $fornecedores->appends($request)->nextPageUrl() ?? '' }}">Próxima »</a>
+                    @if ($fornecedores->currentPage() != 1)
+                        <a style="margin: 0.5rem; text-decoration:none;" href="{{ $fornecedores->appends($request)->previousPageUrl() ?? '' }}">« Anterior</a>
+                    @endif
+                    @for ($page = 1; $page <= $fornecedores->lastPage(); $page++)
+                        @if ($fornecedores->lastPage() == 1)                            
+                        @elseif ($page == $fornecedores->currentPage())
+                            <span style="margin: 0.5rem; text-decoration:none; font-size: 1.2rem;">{{ $page }}</span>
+                        @else
+                            <a style="margin: 0.5rem; text-decoration:none;" href="{{ $fornecedores->appends($request)->url($page) ?? '' }}">{{ $page }}</a>
+                        @endif
+                    @endfor
+                    @if ($fornecedores->currentPage() != $fornecedores->lastPage())
+                        <a style="margin: 0.5rem; text-decoration:none;" href="{{ $fornecedores->appends($request)->nextPageUrl() ?? '' }}">Próxima »</a>        
+                    @endif
+
                 </div>
                 <br>
                 {{-- {{ print_r($request) }} --}}
