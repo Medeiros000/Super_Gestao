@@ -7,20 +7,20 @@ use App\Models\Fornecedor;
 
 class FornecedorController extends Controller
 {
-    public function index()
+    public function index($msg = '')
     {
-        return view('app.fornecedor.index', ['titulo' => 'Fornecedores']);
+        return view('app.fornecedor.index', ['titulo' => 'Fornecedores', 'msg' => $msg]);
     }
 
     public function listar(Request $request)
     {
         $fornecedores = Fornecedor::where('nome', 'ilike', '%' . $request->input('nome') . '%')
             ->where('site', 'ilike', '%' . $request->input('site') . '%')
-            ->where('uf', 'ilike', '%'.$request->input('uf').'%' )
-            ->where('email', 'ilike', '%'.$request->input('email').'%' )
-            ->paginate(2);
-        
-        return view('app.fornecedor.listar', ['titulo' => 'Fornecedor - Listar', 'fornecedores' => $fornecedores]);
+            ->where('uf', 'ilike', '%' . $request->input('uf') . '%')
+            ->where('email', 'ilike', '%' . $request->input('email') . '%')
+            ->paginate(15);
+
+        return view('app.fornecedor.listar', ['titulo' => 'Fornecedor - Listar', 'fornecedores' => $fornecedores, 'request' => $request->all()]);
     }
 
     public function adicionar(Request $request)
@@ -49,9 +49,8 @@ class FornecedorController extends Controller
             $fornecedor->create($request->all());
 
             $msg = 'Cadastro realizado com sucesso';
+        }
 
-        } 
-        
         // Se o token não estiver vazio e o id não estiver vazio, então é uma edição
         if ($request->input('_token') != '' && $request->input('id') != '') {
             $fornecedor = Fornecedor::find($request->input('id'));
@@ -74,6 +73,15 @@ class FornecedorController extends Controller
         echo 'Fornecedor - Editar - ' . $id;
         $fornecedor = Fornecedor::find($id);
 
-        return view('app.fornecedor.adicionar', ['titulo' => 'Fornecedor - Editar' , 'fornecedor' => $fornecedor, 'msg' => $msg]);
+        return view('app.fornecedor.adicionar', ['titulo' => 'Fornecedor - Editar', 'fornecedor' => $fornecedor, 'msg' => $msg]);
+    }
+
+    public function excluir($id, $msg = '')
+    {
+        Fornecedor::find($id)->delete();
+
+        $msg = 'Exclusão realizada com sucesso';
+
+        return redirect()->route('app.fornecedor', $msg);
     }
 }
