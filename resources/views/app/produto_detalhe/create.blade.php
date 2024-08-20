@@ -9,13 +9,12 @@
         </div>
         <div class="menu">
             <ul>
-                <li><a href="{{ route('produto.index') }}">Voltar</a></li>
-                <li><a href="">Consulta</a></li>
+                <li><a href="#">Voltar</a></li>
             </ul>
         </div>
         <div class="informacao-pagina">
             <div style="width:30%; margin: 0 auto">
-                @component('app.produto._components.form_create_edit', ['unidades' => $unidades])
+                @component('app.produto_detalhe._components.form_create_edit', ['unidades' => $unidades])
                 @endcomponent
             </div>
         </div>

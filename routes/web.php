@@ -10,6 +10,7 @@ use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\ProdutoDetalheController;
 use App\Http\Controllers\TesteController;
 
 Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
@@ -38,8 +39,10 @@ Route::middleware(['autenticacao:padrao,visitante'])->prefix('/app')->group(
         Route::get('/fornecedor/excluir/{id}/', [FornecedorController::class, 'excluir'])->name('app.fornecedor.excluir');
 
 
-
+        // produtos
         Route::resource('/produto', ProdutoController::class);
+        // produtos detalhes
+        Route::resource('/produto-detalhe', ProdutoDetalheController::class);
     }
 );
 

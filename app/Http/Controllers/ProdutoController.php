@@ -13,7 +13,7 @@ class ProdutoController extends Controller
      */
     public function index(Request $request)
     {
-        $produtos = Produto::paginate(10);
+        $produtos = Produto::paginate(15);
 
     return view('app.produto.index', ['titulo' => 'Produtos', 'produtos' => $produtos, 'request' => $request->all()]);
     }
@@ -24,7 +24,7 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produto.create', ['titulo' => 'Cadastrar Produto', 'unidades' => $unidades]);
+        return view('app.produto.create', ['titulo' => 'Adicionar Produto', 'unidades' => $unidades]);
     }
 
     /**
@@ -68,6 +68,7 @@ class ProdutoController extends Controller
     {
         $unidades = Unidade::all();
         return view('app.produto.edit', ['titulo' => 'Editar Produto', 'produto' => $produto, 'unidades' => $unidades]);
+        // return view('app.produto.create', ['titulo' => 'Editar Produto', 'produto' => $produto, 'unidades' => $unidades]);
     }
 
     /**

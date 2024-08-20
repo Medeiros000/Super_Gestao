@@ -49,9 +49,17 @@
                 </table>
                 {{ $produtos->appends($request)->links() }}
                 <div style="margin: 1rem">
-                    <a style="margin: 0.5rem; text-decoration:none;" href="{{ $produtos->appends($request)->previousPageUrl() ?? '' }}">« Anterior</a>
+                    @if ($produtos->currentPage() > 1)
+                        <a style="margin: 0.5rem; text-decoration:none;" href="{{ $produtos->appends($request)->previousPageUrl() ?? '' }}">« Anterior</a>
+                    @else
+                        <span style="margin: 0.5rem; text-decoration:none;">« Anterior</span>
+                    @endif
                             Exibindo {{ ($produtos->firstItem()) }} ao {{ ($produtos->lastItem()) }} do total de {{ $produtos->total() }}
-                    <a style="margin: 0.5rem; text-decoration:none;" href="{{ $produtos->appends($request)->nextPageUrl() ?? '' }}">Próxima »</a>
+                    @if ($produtos->currentPage() == $produtos->lastPage())
+                        <span style="margin: 0.5rem; text-decoration:none;">Próxima »</span>
+                    @else
+                        <a style="margin: 0.5rem; text-decoration:none;" href="{{ $produtos->appends($request)->nextPageUrl() ?? '' }}">Próxima »</a>
+                    @endif
                 </div>
                 <br>
                 {{-- {{ print_r($request) }} --}}
