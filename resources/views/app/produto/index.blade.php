@@ -22,6 +22,9 @@
                             <th>Descricao</th>
                             <th>Peso</th>
                             <th>Id</th>
+                            <th>Comprimento</th>
+                            <th>Largura</th>
+                            <th>Altura</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -34,6 +37,9 @@
                                 <td>{{ $produto->descricao }}</td>
                                 <td>{{ $produto->peso }}</td>
                                 <td>{{ $produto->unidade_id }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td><a href="{{ route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
                                 <td><a href="{{ route('produto.edit', ['produto' => $produto->id]) }}">Editar</a></td>
                                 <td>
@@ -47,7 +53,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $produtos->appends($request)->links() }}
+                {{-- {{ $produtos->appends($request)->links() }} --}}
                 <div style="margin: 1rem">
                     @if ($produtos->currentPage() > 1)
                         <a style="margin: 0.5rem; text-decoration:none;" href="{{ $produtos->appends($request)->previousPageUrl() ?? '' }}">« Anterior</a>

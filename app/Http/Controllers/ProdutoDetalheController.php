@@ -44,18 +44,24 @@ class ProdutoDetalheController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * 
+     * @param ProdutoDetalhe $produtoDetalhe
      */
-    public function edit(string $id)
+    public function edit(ProdutoDetalhe $produtoDetalhe)
     {
-        //
+        $unidades = Unidade::all();
+        return view('app.produto_detalhe.edit', [ 'titulo' => 'Detalhes do Produto', 'produto_detalhe' => $produtoDetalhe, 'unidades' => $unidades ]);
     }
 
     /**
      * Update the specified resource in storage.
+     * @param Request $request
+     * @param ProdutoDetalhe $produtoDetalhe
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, ProdutoDetalhe $produtoDetalhe)
     {
-        //
+        $produtoDetalhe->update($request->all());
+        echo 'Atualização realizada com sucesso!';
     }
 
     /**
