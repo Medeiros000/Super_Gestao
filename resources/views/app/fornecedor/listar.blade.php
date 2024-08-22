@@ -40,7 +40,7 @@
                     </tbody>
                 </table>
                 {{-- {{ $fornecedores->appends($request)->links() }} --}}
-                <div style="margin: 2rem;">
+                {{-- <div style="margin: 2rem;">
                     Exibindo {{ ($fornecedores->firstItem()) }} ao {{ ($fornecedores->lastItem()) }} do total de {{ $fornecedores->total() }}
                 </div>
                 <div style="margin: 1rem">
@@ -59,8 +59,13 @@
                         <a style="margin: 0.5rem; text-decoration:none;" href="{{ $fornecedores->appends($request)->nextPageUrl() ?? '' }}">Próxima »</a>        
                     @endif
 
-                </div>
+                </div> --}}
+                @component('app.layouts._components.registros', ['collection' => $fornecedores, 'request' => $request])
+                @endcomponent
+                @component('app.layouts._components.indices', ['collection' => $fornecedores, 'request' => $request])
+                @endcomponent
                 <br>
+
                 {{-- {{ print_r($request) }} --}}
             </div>
         </div>

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Models\ProdutoDetalhe;
 use App\Models\Unidade;
-use Illuminate\Http\Request;
+use App\Models\Item;
 
 class ProdutoController extends Controller
 {
@@ -14,10 +15,9 @@ class ProdutoController extends Controller
      */
     public function index(Request $request)
     {
-        // $produtoDetalhe = ProdutoDetalhe::with('produto')->get();
-        $produtos = Produto::paginate(15);
+        $produtos = Item::with('itemDetalhe')->paginate(10);
 
-    return view('app.produto.index', ['titulo' => 'Produtos', 'produtos' => $produtos, 'request' => $request->all()]);
+        return view('app.produto.index', ['titulo' => 'Produtos', 'produtos' => $produtos, 'request' => $request->all()]);
     }
 
     /**

@@ -13,6 +13,7 @@
                 <li><a href="">Consulta</a></li>
             </ul>
         </div>
+
         <div class="informacao-pagina">
             <div style="width:90%; margin-right: auto; margin-left: auto;">
                 <table border="1" width="100%">
@@ -23,8 +24,8 @@
                             <th>Peso</th>
                             <th>Id</th>
                             <th>Comprimento</th>
-                            <th>Largura</th>
                             <th>Altura</th>
+                            <th>Largura</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -37,39 +38,32 @@
                                 <td>{{ $produto->descricao }}</td>
                                 <td>{{ $produto->peso }}</td>
                                 <td>{{ $produto->unidade_id }}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{ $produto->itemDetalhe->comprimento ?? '' }}</td>
+                                <td>{{ $produto->itemDetalhe->altura ?? '' }}</td>
+                                <td>{{ $produto->itemDetalhe->largura ?? '' }}</td>
                                 <td><a href="{{ route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
                                 <td><a href="{{ route('produto.edit', ['produto' => $produto->id]) }}">Editar</a></td>
                                 <td>
-                                    <form id="form_{{$produto->id}}" method="post" action="{{ route('produto.destroy', ['produto' => $produto->id]) }}">
+                                    <form id="form_{{ $produto->id }}" method="post"
+                                        action="{{ route('produto.destroy', ['produto' => $produto->id]) }}">
                                         @method('DELETE')
                                         @csrf
                                         {{-- <button type="submit">Excluir</button> --}}
-                                        <a href="#" onclick="document.getElementById('form_{{$produto->id}}').submit()">Excluir</a>
+                                        <a href="#"
+                                            onclick="document.getElementById('form_{{ $produto->id }}').submit()">Excluir</a>
                                     </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
                 {{-- {{ $produtos->appends($request)->links() }} --}}
-                <div style="margin: 1rem">
-                    @if ($produtos->currentPage() > 1)
-                        <a style="margin: 0.5rem; text-decoration:none;" href="{{ $produtos->appends($request)->previousPageUrl() ?? '' }}">« Anterior</a>
-                    @else
-                        <span style="margin: 0.5rem; text-decoration:none;">« Anterior</span>
-                    @endif
-                            Exibindo {{ ($produtos->firstItem()) }} ao {{ ($produtos->lastItem()) }} do total de {{ $produtos->total() }}
-                    @if ($produtos->currentPage() == $produtos->lastPage())
-                        <span style="margin: 0.5rem; text-decoration:none;">Próxima »</span>
-                    @else
-                        <a style="margin: 0.5rem; text-decoration:none;" href="{{ $produtos->appends($request)->nextPageUrl() ?? '' }}">Próxima »</a>
-                    @endif
-                </div>
+                @component('app.layouts._components.registros', ['collection' => $produtos, 'request' => $request])
+                @endcomponent
+                @component('app.layouts._components.indices', ['collection' => $produtos, 'request' => $request])
+                @endcomponent
+
                 <br>
-                {{-- {{ print_r($request) }} --}}
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
