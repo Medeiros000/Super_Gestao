@@ -36,6 +36,32 @@
                                 <td><a href="{{ route('app.fornecedor.editar', $fornecedor->id) }}">Editar</a></td>
                                 <td><a href="{{ route('app.fornecedor.excluir', $fornecedor->id) }}">Excluir</a></td>
                             </tr>
+                            <tr>
+                                <td colspan='6'>
+                                    <p>Lista de Produtos</p>
+                                    {{ count($fornecedor->produtos) == 0 ? 'Nenhum produto cadastrado' : count($fornecedor->produtos) . ' produto(s)' }}
+                                    <table border="1" style="margin: 0 auto; width: 60%;">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nome</th>
+                                                <th>Descrição</th>
+                                                <th>Peso</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($fornecedor->produtos as $produto)
+                                                <tr>
+                                                    <td>{{ $produto->id }}</td>
+                                                    <td>{{ $produto->nome }}</td>
+                                                    <td>{{ $produto->descricao }}</td>
+                                                    <td>{{ $produto->peso }} kg</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
