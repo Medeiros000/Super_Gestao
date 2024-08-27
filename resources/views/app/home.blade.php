@@ -4,7 +4,7 @@
 
 @section('conteudo')
     <div class="conteudo-pagina">
-        <div class="titulo-pagina">
-            <h1>{{ $titulo }}</h1>
+        <div class="titulo-pagina-2">
+            <p>{{ $titulo }}</p>
         </div>    
 @endsection

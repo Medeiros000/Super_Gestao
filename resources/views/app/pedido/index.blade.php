@@ -24,6 +24,7 @@
                             <th></th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,6 +32,8 @@
                             <tr>
                                 <td>{{ $pedido->id }}</td>
                                 <td>{{ $pedido->cliente_id }}</td>
+                                <td><a href="{{ route('pedido-produto.create', ['pedido' => $pedido->id]) }}">Adicionar
+                                        Produtos</a></td>
                                 <td><a href="{{ route('pedido.show', ['pedido' => $pedido->id]) }}">Visualizar</a></td>
                                 <td><a href="{{ route('pedido.edit', ['pedido' => $pedido->id]) }}">Editar</a></td>
                                 <td>
@@ -47,7 +50,7 @@
                         @endforeach
                     </tbody>
                 </table>
-								{{-- {{ $produtos->appends($request)->links() }} --}}
+                {{-- {{ $produtos->appends($request)->links() }} --}}
                 @component('app.layouts._components.registros', ['collection' => $pedidos, 'request' => $request])
                 @endcomponent
                 @component('app.layouts._components.indices', ['collection' => $pedidos, 'request' => $request])

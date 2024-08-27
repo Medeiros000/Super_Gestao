@@ -51,15 +51,15 @@ class ClienteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('app.cliente.show', ['titulo' => 'Clientes', 'cliente' => Cliente::find($id)]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Cliente $cliente, Request $request)
     {
-        //
+        return view('app.cliente.edit', ['titulo' => 'Clientes', 'cliente' => $cliente, 'request' => $request]);
     }
 
     /**
@@ -67,14 +67,29 @@ class ClienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $regras = [
+            'nome' => 'required|min:3|max:40',
+        ];
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres',
+            'nome.max' => 'O campo nome deve ter no máximo 40 caracteres',
+        ];
+        $request->validate($regras, $feedback);
+
+        $cliente = Cliente::find($id);
+        $cliente->nome = $request->get('nome');
+        $cliente->save();
+
+        return redirect()->route('cliente.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Cliente $cliente)
     {
-        //
+        $cliente->delete();
+        return redirect()->route('cliente.index');
     }
 }
