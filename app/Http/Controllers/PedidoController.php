@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cliente;
 use Illuminate\Http\Request;
+use App\Models\Pedido;
+use App\Models\Cliente;
 
-class ClienteController extends Controller
+class PedidoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $clientes = Cliente::paginate(10);
-        return view('app.cliente.index', ['titulo' => 'Clientes', 'clientes' => $clientes, 'request' => $request->all()]);
+        $pedidos = Pedido::paginate(10);
+        return view('app.pedido.index', ['titulo' => 'Pedidos', 'pedidos' => $pedidos, 'request' => $request->all()]);
     }
 
     /**
@@ -21,7 +22,8 @@ class ClienteController extends Controller
      */
     public function create(Request $request)
     {
-        return view('app.cliente.create', ['titulo' => 'Clientes', 'request' => $request->all()]);
+        $clientes = Cliente::all();
+        return view('app.pedido.create', ['titulo' => 'Pedidos', 'request' => $request->all(), 'clientes' => $clientes]);
     }
 
     /**
@@ -30,20 +32,18 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $regras = [
-            'nome' => 'required|min:3|max:40',
+            'cliente_id' => 'exists:clientes,id',
         ];
         $feedback = [
-            'required' => 'O campo :attribute deve ser preenchido',
-            'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres',
-            'nome.max' => 'O campo nome deve ter no máximo 40 caracteres',
+            'cliente_id.exists' => 'O cliente informado não existe',
         ];
         $request->validate($regras, $feedback);
 
-        $cliente = new Cliente();
-        $cliente->nome = $request->nome;
-        $cliente->save();
+        $pedido = new Pedido();
+        $pedido->cliente_id = $request->cliente_id;
+        $pedido->save();
 
-        return redirect()->route('cliente.index');
+        return redirect()->route('pedido.index');
     }
 
     /**

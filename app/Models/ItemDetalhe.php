@@ -16,4 +16,9 @@ class ItemDetalhe extends Model
     {
         return $this->belongsTo(Item::class, 'produto_id', 'id');
     }
+
+    public function unidade()
+    {
+        return $this->belongsTo(Unidade::class);
+    }
 }

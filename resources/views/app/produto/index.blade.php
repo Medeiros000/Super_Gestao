@@ -19,6 +19,7 @@
                 <table border="1" width="100%">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Nome</th>
                             <th>Descricao</th>
                             <th>Fornecedor</th>
@@ -35,14 +36,15 @@
                     <tbody>
                         @foreach ($produtos as $produto)
                             <tr>
+                                <td>{{ $produto->id }}</td>
                                 <td>{{ $produto->nome }}</td>
                                 <td>{{ $produto->descricao }}</td>
                                 <td>{{ $produto->fornecedor->nome }}</td>
                                 <td>{{ $produto->peso }}</td>
-                                <td>{{ $produto->unidade_id }}</td>
-                                <td>{{ $produto->itemDetalhe->comprimento ?? '' }}</td>
-                                <td>{{ $produto->itemDetalhe->altura ?? '' }}</td>
-                                <td>{{ $produto->itemDetalhe->largura ?? '' }}</td>
+                                <td>{{ $produto->unidade->unidade }}</td>
+                                <td>{{ $produto->itemDetalhe->comprimento ?? '' }} {{ $produto->itemDetalhe->unidade->unidade ?? ''}}</td>
+                                <td>{{ $produto->itemDetalhe->altura ?? '' }} {{ $produto->itemDetalhe->unidade->unidade ?? ''}}</td>
+                                <td>{{ $produto->itemDetalhe->largura ?? '' }} {{ $produto->itemDetalhe->unidade->unidade ?? ''}}</td>
                                 <td><a href="{{ route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
                                 <td><a href="{{ route('produto.edit', ['produto' => $produto->id]) }}">Editar</a></td>
                                 <td>
@@ -59,7 +61,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{-- {{ $produtos->appends($request)->links() }} --}}
+								{{-- {{ $produtos->appends($request)->links() }} --}}
                 @component('app.layouts._components.registros', ['collection' => $produtos, 'request' => $request])
                 @endcomponent
                 @component('app.layouts._components.indices', ['collection' => $produtos, 'request' => $request])
