@@ -13,7 +13,7 @@ class PedidoController extends Controller
      */
     public function index(Request $request)
     {
-        $pedidos = Pedido::paginate(10);
+        $pedidos = Pedido::with(['cliente'])->paginate(10);
         return view('app.pedido.index', ['titulo' => 'Pedidos', 'pedidos' => $pedidos, 'request' => $request->all()]);
     }
 

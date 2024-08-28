@@ -12,5 +12,8 @@
     </select>
     {{ $errors->has('produto_id') ? $errors->first('produto_id') : '' }}
 
+    <input type="number" name="quantidade" value="{{ old('quantidade') }}" placeholder="Quantidade">
+    {{ $errors->has('quantidade') ? $errors->first('quantidade') : '' }}
+
     <button type="submit" class="borda-preta">{{ isset($pedido_produto->id) ? 'Atualizar' : 'Cadastrar' }}</button>
 </form>

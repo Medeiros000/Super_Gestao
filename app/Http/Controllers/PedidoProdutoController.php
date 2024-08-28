@@ -22,7 +22,7 @@ class PedidoProdutoController extends Controller
      */
     public function create(Pedido $pedido)
     {
-        $pedido->produtos;
+        // $pedido->produtos;
         return view('app.pedido_produto.create', ['pedido' => $pedido, 'produtos' => Produto::all()]);
     }
 
@@ -33,16 +33,19 @@ class PedidoProdutoController extends Controller
     {
         $regras = [
             'produto_id' => 'exists:produtos,id',
+            'quantidade' => 'required|integer|min:1',
         ];
         $feedback = [
             'produto_id.exists' => 'O produto informado não existe',
+            'required' => 'O campo :attribute deve possuir um valor válido',
+            'quantidade.integer' => 'A quantidade deve ser um número inteiro',
+            'quantidade.min' => 'A quantidade deve ser no mínimo 1',
         ];
         $request->validate($regras, $feedback);
 
-        $pedidoProduto = new PedidoProduto();
-        $pedidoProduto->pedido_id = $pedido->id;
-        $pedidoProduto->produto_id = $request->get('produto_id');
-        $pedidoProduto->save();
+        $pedido->produtos()->attach([
+            $request->get('produto_id') => ['quantidade' => $request->get('quantidade')]
+        ]);
 
         return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id]);
     }
@@ -74,8 +77,11 @@ class PedidoProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(PedidoProduto $pedidoProduto, $pedido_id)
     {
-        //
+        $pedidoProduto->delete();
+        // $pedido->produtos()->detach($produto->id);
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido_id]);
+        // return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id]);
     }
 }
