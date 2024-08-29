@@ -43,6 +43,13 @@ class PedidoProdutoController extends Controller
         ];
         $request->validate($regras, $feedback);
 
+        if ($pedido->produtos->contains($request->get('produto_id'))) {
+            $pedidoProduto = $pedido->produtos->where('id', $request->get('produto_id'))->first();
+            $pedidoProduto->pivot->quantidade += $request->get('quantidade');
+            $pedidoProduto->pivot->update();
+            return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id]);
+        }
+
         $pedido->produtos()->attach([
             $request->get('produto_id') => ['quantidade' => $request->get('quantidade')]
         ]);

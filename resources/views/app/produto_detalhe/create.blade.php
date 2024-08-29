@@ -13,7 +13,7 @@
             </ul>
         </div>
         <div class="informacao-pagina">
-            <div style="width:30%; margin: 0 auto">
+            <div>
                 @component('app.produto_detalhe._components.form_create_edit', ['unidades' => $unidades])
                 @endcomponent
             </div>

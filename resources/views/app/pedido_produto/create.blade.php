@@ -18,7 +18,7 @@
             <p>ID do pedido: {{ $pedido->id }}</p>
             <span>ID do Cliente: {{ $pedido->cliente_id }}</span>
             <span>{{$pedido->cliente->nome}}</span>
-            <div style="width:50%; margin: 0 auto">
+            <div>
                 <h4>Itens do pedido</h4>
                 <table border="1" width="100%">
                     <thead>

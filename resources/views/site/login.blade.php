@@ -4,12 +4,12 @@
 
 @section('conteudo')
     <div class="conteudo-pagina">
-        <div class="titulo-pagina">
+        <div class="titulo-pagina-2">
             <h1>Login</h1>
         </div>
 
         <div class="informacao-pagina">
-            <div style="width: 30%; margin: 0 auto;">
+            <div>
                 <form action="" method="POST">
                     @csrf
                     <input name="usuario" value="{{ old('usuario') }}" type="text" placeholder="Usuário" class="borda-preta">

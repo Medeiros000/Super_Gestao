@@ -14,7 +14,7 @@
             </ul>
         </div>
         <div class="informacao-pagina">
-            <div style="width:30%; margin: 0 auto">
+            <div>
                 {{ $msg ?? '' }}
                 <form action="{{ route('app.fornecedor.adicionar') }}" method="post">
                     @csrf

@@ -1,6 +1,7 @@
 * {
-  /* border: 1px solid red; */
-  font-size: 12px;
+  /* border: 1px solid red;
+  box-sizing: border-box; */
+  font-size: 14px;
 }
 
 html,
@@ -163,12 +164,7 @@ button:hover {
   margin-bottom: 100px;
 }
 
-.titulo-pagina {
-  padding: 100px 0px 60px 0px;
-  background-color: #2a9ee2;
-  text-align: center;
-}
-
+.titulo-pagina,
 .titulo-pagina-2 {
   padding: 70px 0px 10px 0px;
   background-color: #2a9ee2;
@@ -176,9 +172,11 @@ button:hover {
   margin-bottom: 10px;
 }
 
-.informacao-pagina {
+.informacao-pagina>div {
   text-align: center;
   margin-top: 30px;
+  width: 30%;
+  margin: 0 auto;
 }
 
 .informacao-pagina p {
@@ -187,6 +185,9 @@ button:hover {
 
 .rodape {
   width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 9rem;
 }
 
 .redes-sociais,
@@ -218,6 +219,18 @@ span {
 .relative {
   margin: 0 0.5rem;
 }
+
+.redes-sociais>img,
+.localizacao>img {
+  width: 20px;
+  margin: 0px 5px;
+}
+
+.element {
+  animation: fadeOut 2s forwards;
+  animation-timeline: scroll;
+}
+
 /* 
 a {
   text-decoration: none;
@@ -227,3 +240,122 @@ span.relative {
   font-size: 1.5rem;
   color: red;
 } */
+
+/* media */
+@media (max-width: 768px) {
+  * {
+    font-size: 12px;
+    /* border: 1px solid red; */
+    /* box-sizing: border-box; */
+  }
+
+  body {
+    height: fit-content;
+  }
+
+  table * {
+    font-size: 0.6rem;
+  }
+
+  .topo {
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .logo {
+    width: fit-content;
+    display: block;
+    margin-left: 1rem;
+  }
+
+  .menu {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+
+  .menu a {
+    padding: 0;
+  }
+
+  .menu ul {
+    padding: 0.5rem;
+    height: fit-content;
+  }
+
+  .menu ul li {
+    height: fit-content;
+    padding-left: 0.2rem;
+  }
+
+  .titulo-pagina-2 {
+    padding: 0;
+    height: 5rem;
+    height: fit-content;
+  }
+
+  .conteudo-pagina {
+    width: 100%;
+    height: fit-content;
+  }
+
+  .esquerda,
+  .direita {
+    width: 100%;
+    height: fit-content;
+  }
+
+  .titulo-pagina,
+  .titulo-pagina-2 {
+    padding: 0.5rem;
+  }
+
+  .titulo-pagina h1,
+  .titulo-pagina-2 h1,
+  .informacoes h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .informacoes,
+  .contato {
+    margin: 2.5rem;
+  }
+
+  .contato-principal {
+    margin: 0px 60px 60px 40px;
+  }
+
+  .redes-sociais>img,
+  .localizacao>img {
+    width: 20px;
+    margin: 0px 5px;
+  }
+
+  .informacao-pagina {
+    display: block;
+  }
+
+  .informacao-pagina>div {
+    width: 15rem;
+    margin: 0 auto;
+  }
+
+  .redes-sociais h2,
+  .area-contato h2,
+  .localizacao h2 {
+    font-size: 1rem;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}

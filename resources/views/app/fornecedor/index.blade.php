@@ -5,7 +5,7 @@
 @section('conteudo')
     <div class="conteudo-pagina">
         <div class="titulo-pagina-2">
-            <p>{{ $titulo }}</p>
+            <p>{{ $titulo }} - Pesquisar</p>
         </div>
         <div class="menu">
             <ul>
@@ -14,7 +14,7 @@
             </ul>
         </div>
         <div class="informacao-pagina">
-            <div style="width:30%; margin: 0 auto">
+            <div>
                 {{ $msg ?? '' }}
                 <form action="{{ route('app.fornecedor.listar') }}" method="post">
                     @csrf
