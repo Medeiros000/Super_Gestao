@@ -32,21 +32,28 @@ Route::middleware(['autenticacao:padrao,visitante'])->prefix('/app')->group(
         Route::get('/home', [HomeController::class, 'index'])->name('app.home');
         Route::get('/sair', [LoginController::class, 'sair'])->name('app.sair');
 
-        Route::get('/fornecedor/index/{msg?}', [FornecedorController::class, 'index'])->name('app.fornecedor.index');
-        Route::get('/fornecedor/listar', [FornecedorController::class, 'listar'])->name('app.fornecedor.listar');
-        Route::post('/fornecedor/listar', [FornecedorController::class, 'listar'])->name('app.fornecedor.listar');
-        Route::get('/fornecedor/adicionar/{msg?}', [FornecedorController::class, 'adicionar'])->name('app.fornecedor.adicionar');
-        Route::post('/fornecedor/adicionar/{msg?}', [FornecedorController::class, 'adicionar'])->name('app.fornecedor.adicionar');
-        Route::get('/fornecedor/editar/{id}/{msg?}', [FornecedorController::class, 'editar'])->name('app.fornecedor.editar');
-        Route::get('/fornecedor/excluir/{id}/', [FornecedorController::class, 'excluir'])->name('app.fornecedor.excluir');
+        // Route::get('/fornecedor/index/{msg?}', [FornecedorController::class, 'index'])->name('app.fornecedor.index');
+        // Route::get('/fornecedor/listar', [FornecedorController::class, 'listar'])->name('app.fornecedor.listar');
+        // Route::post('/fornecedor/listar', [FornecedorController::class, 'listar'])->name('app.fornecedor.listar');
+        // Route::get('/fornecedor/adicionar/{msg?}', [FornecedorController::class, 'adicionar'])->name('app.fornecedor.adicionar');
+        // Route::post('/fornecedor/adicionar/{msg?}', [FornecedorController::class, 'adicionar'])->name('app.fornecedor.adicionar');
+        // Route::get('/fornecedor/editar/{id}/{msg?}', [FornecedorController::class, 'editar'])->name('app.fornecedor.editar');
+        // Route::get('/fornecedor/excluir/{id}/', [FornecedorController::class, 'excluir'])->name('app.fornecedor.excluir');
 
+        // fornecedores
+        Route::resource('fornecedor', FornecedorController::class);
+        // fornecedores search route
+        Route::get('fornecedor-search', [FornecedorController::class, 'search'])->name('fornecedor-search');
+        // fornecedores results route
+        Route::post('fornecedor.results', [FornecedorController::class, 'results'])->name('fornecedor-results');
 
         // produtos
         Route::resource('produto', ProdutoController::class);
         // produtos detalhes
         Route::resource('produto-detalhe', ProdutoDetalheController::class);
-
+        // clientes
         Route::resource('cliente', ClienteController::class);
+        // pedidos
         Route::resource('pedido', PedidoController::class);
 
         // Route::resource('pedido-produto', PedidoProdutoController::class);
