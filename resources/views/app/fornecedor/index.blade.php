@@ -49,7 +49,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan='6'>
+                                <td colspan='7'>
                                     <p>Lista de Produtos</p>
                                     {{ count($fornecedor->produtos) == 0 ? 'Nenhum produto cadastrado' : count($fornecedor->produtos) . ' produto(s)' }}
                                     <table border="1" style="margin: 0 auto; width: 60%;">
